@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import Routes from './routes';
 import GlobalStyles from './styles/GlobalStyles';
 import Header from './components/Header';
-import history from './services/hystory';
+import history from './services/history';
 import store from './store';
 
 function App() {
