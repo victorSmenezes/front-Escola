@@ -59,42 +59,10 @@ export default createGlobalStyle`
     width: 320px;
   }
 
-  .Toastify__toast-container--top-right {
-    top: 10px;
-    right: 10px;
-  }
-
-  .Toastify__toast-container--bottom-right {
-    bottom: 10px;
-    right: 10px;
-  }
-
-  .Toastify__toast-container--top-left {
-    top: 10px;
-    left: 10px;
-  }
-
-  .Toastify__toast-container--bottom-left {
-    bottom: 10px;
-    left: 10px;
-  }
-
-  .Toastify__toast-container--top-center {
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .Toastify__toast-container--bottom-center {
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
 `;
 
 export const Container = styled.div`
-  max-width: 360px;
+  max-width: 480px;
   margin: 30px auto;
   background-color: #fff;
   padding: 30px;
