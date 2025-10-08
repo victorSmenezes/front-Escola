@@ -3,9 +3,10 @@ import { toast } from 'react-toastify';
 import isEmail from 'validator/lib/isEmail';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '../../styles/GlobalStyles';
-import { Form } from './styled';
+import { ContainerButtons, Form } from './styled';
 import Loading from '../../components/Loading';
 import * as actions from '../../store/modules/auth/actions';
+import api from '../../services/axios';
 
 function Register() {
   const [nome, setNome] = useState('');
@@ -49,6 +50,23 @@ function Register() {
     dispatch(actions.registerRequest({ nome, email, password }));
   };
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    if (!id) return;
+
+    try {
+      await api.delete(`/users/`);
+      toast.success(
+        'Sua conta foi deletada. Você será redirecionado ao registro...'
+      );
+      dispatch(actions.loginFailure());
+      // link para register
+    } catch {
+      toast.error('Erro ao deletar conta.');
+    }
+  };
+
   return (
     <Container>
       <Loading isLoading={isLoading} />
@@ -83,7 +101,10 @@ function Register() {
           />
         </label>
 
-        <button type="submit">Salvar</button>
+        <ContainerButtons>
+          <button type="submit">Salvar</button>
+          {id && <button onClick={handleDelete}>Remover conta</button>}
+        </ContainerButtons>
       </Form>
     </Container>
   );

@@ -25,3 +25,13 @@ export const Form = styled.form`
     }
   }
 `;
+
+export const ContainerButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  button {
+    width: 100%;
+  }
+`;
