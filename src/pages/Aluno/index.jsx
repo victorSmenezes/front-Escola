@@ -5,8 +5,10 @@ import { toast } from 'react-toastify';
 import isEmail from 'validator/lib/isEmail';
 import { isFloat, isInt } from 'validator';
 import { useDispatch } from 'react-redux';
+import { FaEdit, FaUserCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { Container } from '../../styles/GlobalStyles';
-import { Form } from './styled';
+import { Form, ProfilePicture, Title } from './styled';
 import Loading from '../../components/Loading';
 import api from '../../services/axios';
 import history from '../../services/history';
@@ -20,6 +22,7 @@ function Aluno({ match }) {
   const [idade, setIdade] = useState('');
   const [altura, setAltura] = useState('');
   const [peso, setPeso] = useState('');
+  const [foto, setFoto] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -31,6 +34,7 @@ function Aluno({ match }) {
         setIsLoading(true);
         const { data } = await api.get(`/alunos/${id}`);
         const Foto = get(data, 'Fotos[0].url', '');
+        setFoto(Foto);
         setNome(data.nome);
         setSobrenome(data.sobrenome);
         setEmail(data.email);
@@ -144,7 +148,20 @@ function Aluno({ match }) {
   return (
     <Container>
       <Loading isLoading={isLoading} />
-      <h1>{id ? 'Editar aluno' : 'Novo aluno'}</h1>
+      <Title>{id ? 'Editar aluno' : 'Novo aluno'}</Title>
+
+      {id && (
+        <ProfilePicture>
+          {foto ? (
+            <img src={foto} crossOrigin="anonymous" alt={nome} />
+          ) : (
+            <FaUserCircle size={180} />
+          )}
+          <Link to={`/fotos/${id}`}>
+            <FaEdit size={24} />
+          </Link>
+        </ProfilePicture>
+      )}
 
       <Form onSubmit={handleSubmit}>
         <input
